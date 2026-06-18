@@ -285,7 +285,10 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
         accessibilityPostLayoutChangedNotification()
 
         let showMaxMin = (dataSet as? MyCandleChartDataSet)?.showMaxMin ?? true
-        guard showMaxMin else { return }
+        guard showMaxMin else {
+            context.restoreGState()
+            return
+        }
         
         // 可见区域最左界的箭头数据
         guard let lowestVisbleEntry = dataSet.entryForIndex(_xBounds.min) as? CandleChartDataEntry else {
