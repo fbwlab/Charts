@@ -284,6 +284,9 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
         // Post this notification to let VoiceOver account for the redrawn frames
         accessibilityPostLayoutChangedNotification()
 
+        let showMaxMin = (dataSet as? MyCandleChartDataSet)?.showMaxMin ?? true
+        guard showMaxMin else { return }
+        
         // 可见区域最左界的箭头数据
         guard let lowestVisbleEntry = dataSet.entryForIndex(_xBounds.min) as? CandleChartDataEntry else {
             return
